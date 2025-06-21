@@ -1,0 +1,94 @@
+/* Master Stylesheet for T.M. Automobiles */
+
+/* 1. Global Resets & Typography */
+body { margin: 0; background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
+*, *::before, *::after { box-sizing: border-box; }
+h1, h2, h3, p, a { margin: 0; padding: 0; }
+a { text-decoration: none; color: inherit; }
+button { background: none; border: none; cursor: pointer; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+
+/* 2. Layout & Helpers */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.section { padding: 6rem 0; }
+.text-center { text-align: center; }
+/* 3. Navbar */
+.navbar { position: sticky; top: 0; z-index: 100; transition: background-color 0.3s, backdrop-filter 0.3s; }
+.navbar-scrolled { background-color: rgba(0,0,0,0.7); backdrop-filter: blur(10px); }
+.navbar .container { display: flex; justify-content: space-between; align-items: center; height: 5rem; }
+.navbar-brand { font-size: 1.5rem; font-weight: 800; }
+.navbar-links { display: none; }
+.navbar-link { color: #aaa; font-weight: 500; padding: 0.5rem 1rem; transition: color 0.2s; }
+.navbar-link:hover { color: #fff; }
+.navbar-link-active { color: #fff; }
+.navbar-menu-toggle { display: flex; color: #fff; }
+
+/* 4. Hero Section */
+.hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; color: #fff; }
+.hero-bg-slider { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.hero-bg-image { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transform: scale(1.1); transition: opacity 1.5s, transform 1.5s; }
+.hero-bg-image-active { opacity: 1; transform: scale(1); }
+.hero-overlay { position: absolute; inset: 0; z-index: -1; background: #000; opacity: 0.6; }
+.hero-content { text-align: center; max-width: 800px; padding: 1rem; }
+.hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+.hero p { font-size: 1.125rem; color: #ccc; margin-bottom: 2rem; }
+.hero-cta { background-color: #007aff; color: #fff; font-weight: 700; padding: 1rem 2rem; border-radius: 99px; display: inline-flex; align-items: center; gap: 0.75rem; transition: background-color 0.2s; }
+.hero-cta:hover { background-color: #0056b3; }
+
+/* 5. About Section */
+.about .container { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
+.about-image { height: 400px; border-radius: 0.75rem; background-size: cover; background-position: center; }
+.about-content h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+.about-content p { font-size: 1.125rem; color: #ccc; line-height: 1.6; }
+
+/* 6. Collections Section */
+.collections h2 { font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 1rem; }
+.collections .subtitle { text-align: center; color: #aaa; margin-bottom: 3rem; }
+.collections-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+.collections-filter-btn { color: #aaa; padding: 0.5rem 1.25rem; border-radius: 99px; transition: all 0.2s; }
+.collections-filter-btn:hover { color: #fff; background-color: #222; }
+.collections-filter-btn-active { background-color: #007aff; color: #fff; }
+.collections-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+.car-card { background-color: #111; border-radius: 0.75rem; overflow: hidden; cursor: pointer; transition: transform 0.2s; }
+.car-card:hover { transform: translateY(-5px); }
+.car-card-img-wrapper { position: relative; }
+.car-card-img { width: 100%; height: 220px; object-fit: cover; }
+.car-card-status { position: absolute; top: 0.75rem; right: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 700; color: #fff; }
+.status-available { background-color: #34c759; }
+.status-sold { background-color: #ff3b30; }
+.car-card-content { padding: 1.25rem; }
+.car-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+.car-card-cta { display: inline-flex; align-items: center; gap: 0.5rem; color: #007aff; font-weight: 700; }
+
+/* 7. Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200; display: flex; align-items: center; justify-content: center; }
+.modal-content { position: relative; background: #111; max-width: 1000px; width: 95%; padding: 1rem; border-radius: 0.75rem; }
+.modal-close-btn { position: absolute; top: 1rem; right: 1rem; color: #aaa; cursor: pointer; }
+.modal-img-container { position: relative; }
+.modal-img { width: 100%; height: auto; max-height: 80vh; object-fit: contain; }
+.modal-nav { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.modal-prev { left: 1rem; }
+.modal-next { right: 1rem; }
+.modal-counter { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.875rem; }
+.modal-title { text-align: center; font-size: 1.25rem; font-weight: 700; margin-top: 1rem; }
+
+/* 8. Footer */
+.footer { background-color: #111; text-align: center; padding: 3rem 1.5rem; }
+.footer-socials { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+.footer-socials a { color: #aaa; transition: color 0.2s; }
+.footer-socials a:hover { color: #fff; }
+.footer-copy { color: #666; font-size: 0.875rem; }
+
+/* 9. Responsive Breakpoints */
+@media (min-width: 768px) {
+  .navbar-links { display: flex; gap: 0.5rem; }
+  .navbar-menu-toggle { display: none; }
+  .hero h1 { font-size: 4rem; }
+  .about .container { grid-template-columns: 1fr 1fr; }
+  .about-content { order: 1; }
+  .about-image { order: 2; }
+  .collections-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .collections-grid { grid-template-columns: 1fr 1fr 1fr; }
+} 
