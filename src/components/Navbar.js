@@ -16,32 +16,55 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    // Handle scroll for navbar background
     const handleScroll = () => {
-      const sections = navLinks.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        if (section && section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
-          setActiveSection(section.id);
-          break;
-        }
-      }
       setIsScrolled(window.scrollY > 20);
     };
 
+    // Intersection Observer for active section detection
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px', // Adjust these values to fine-tune detection
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    navLinks.forEach((link) => {
+      const section = document.getElementById(link.id);
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Initial call to set correct active section
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      // Offset by the navbar height if needed
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect.top - bodyRect;
-      const offsetPosition = elementPosition - offset;
+      // Get navbar height dynamically
+      const navbar = document.querySelector('.navbar');
+      const navbarHeight = navbar ? navbar.offsetHeight : 80;
+      
+      // Calculate the target position
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - navbarHeight;
       
       window.scrollTo({
         top: offsetPosition,
@@ -81,7 +104,11 @@ const Navbar = () => {
             className="navbar-mobile-menu"
           >
             {navLinks.map((link) => (
-              <button key={link.id} onClick={() => scrollToSection(link.id)}>
+              <button 
+                key={link.id} 
+                onClick={() => scrollToSection(link.id)}
+                className={activeSection === link.id ? 'active' : ''}
+              >
                 {link.title}
               </button>
             ))}

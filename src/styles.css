@@ -443,6 +443,42 @@ section {
   }
 }
 
+/* Mobile-specific fixes */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .hero-nav {
+    width: 3rem;
+    height: 3rem;
+    top: 50%;
+  }
+  .hero-nav-prev {
+    left: 1rem;
+  }
+  .hero-nav-next {
+    right: 1rem;
+  }
+  .hero-indicator {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  .hero-content {
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+  .navbar-container {
+    height: 6rem;
+    padding: 0 1rem;
+  }
+  .navbar-brand img {
+    height: 60px;
+  }
+}
+
 /* About Section */
 .about {
   background: #1a1a1a;
